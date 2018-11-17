@@ -366,6 +366,19 @@
 		"oS": 0,
 		"uL": 1
 		},
+	"/assets/scss/custom/related_post.sass": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 2,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/assets/scss/custom/related_post.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
 	"/assets/scss/custom/search.sass": {
 		"aP": 0,
 		"bl": 0,
@@ -404,15 +417,15 @@
 		},
 	"/assets/scss/style.sass": {
 		"aP": 0,
-		"bl": 0,
+		"bl": 1,
 		"dP": 10,
-		"dS": 0,
+		"dS": 2,
 		"ft": 2,
-		"ma": 0,
+		"ma": 1,
 		"oA": 0,
-		"oAP": "/assets/scss/style.css",
-		"oF": 0,
-		"oS": 0,
+		"oAP": "/assets/css/style.css",
+		"oF": 2,
+		"oS": 3,
 		"uL": 1
 		},
 	"/assets/scss/vendors/bootstrap-3/_bootstrap-compass.scss": {
@@ -1902,8 +1915,8 @@
 	},
 "projectAttributes": {
 	"creationDate": 564166424.09911895,
-	"displayValue": "mentores",
-	"displayValueWasSetByUser": 0,
+	"displayValue": "na estante",
+	"displayValueWasSetByUser": 1,
 	"iconImageName": "meme-doge",
 	"iconImageWasSetByUser": 0
 	},

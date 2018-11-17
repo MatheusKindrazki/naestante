@@ -11,13 +11,13 @@
 		-moz-transition : all 0.3s ease-out
 		-webkit-transition: all 0.3s ease-out                                                                                  
 		-o-transition : all 0.3s ease-out
-		transition : all 0.3s ease-out
 		@include flexbox()
 		@include flex-basis(50%)
 		@include justify-content(space-between)
 		@include align-items(center)
 		padding-left: 20px
 		padding-right: 20px
+		@include transition(all .3s ease)
 		.logo
 			// @include flex(1 1 10%)
 			@include flexbox()
@@ -27,6 +27,7 @@
 			margin: 0
 			padding: 0
 			max-height: 100%!important
+			padding-left: 20px!important
 			img
 				width: auto
 				height: auto
@@ -42,20 +43,12 @@
 				@include transition( all 0.3s ease-out)
 				max-height: 100%
 		&.small
-			height: 65px
-			line-height: 35px
+			// line-height: 35px
 			@include box-shadow(0 2px 20px 1px rgba(black,0.2))
-			h1
-				height: 70px
-				line-height: 35px
-				font-size: 25px
-				@include flexbox()
-				@include justify-content(center)
-				@include align-items(center)
-			img
-				width: 40%
-				height: auto
-				margin: 0 
+			.form
+				top: 2px
+				label
+					font-size: calculateRem(18px)
 		.menu
 			// @include flex(1 1 50%)
 			@include flexbox()
@@ -174,6 +167,9 @@
 			position: absolute
 			right: 10px
 			top: 0
+			label
+				margin-bottom: 0px!important
+				font-size: calculateRem(18px)
 			#form-container
 				#searchform
 					cursor: pointer
@@ -181,9 +177,13 @@
 						#s
 							width: 10em
 							opacity: 1
+							margin: 0
+							padding: 0
 					#s
 						width: 0
 						opacity: 0
+						margin: 0
+						padding: 0
 						background-color: transparent!important
 						border: none
 						border-bottom: 2px solid

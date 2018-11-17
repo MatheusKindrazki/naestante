@@ -2,7 +2,7 @@ jQuery('document').ready(function () {
 
 	jQuery(window).scroll(function () {
 		var sc = jQuery(window).scrollTop()
-		if (sc > 100) {
+		if (sc > 300) {
 			jQuery("#header-sroll").addClass("small")
 		} else {
 			jQuery("#header-sroll").removeClass("small")

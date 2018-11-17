@@ -19,7 +19,7 @@ $frontpage_id = get_option( 'page_on_front' );
 			<div class="form">
 				<div id="form-container">
 					<form role="search" method="get" id="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-						<input type="text" value="" placeholder="Pesquise_" name="s" id="s" placeholder="<?php _e( 'Pesquisar', 'mentores' ); ?>" />
+						<input type="text" value="" autocomplete="off" placeholder="Pesquise_" name="s" id="s" placeholder="<?php _e( 'Pesquisar', 'mentores' ); ?>" />
 						<label for="s">
 							<i class="fas fa-search"></i>
 						</label>

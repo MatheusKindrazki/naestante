@@ -32,8 +32,9 @@
 								</a>
 							<?php }; ?>
                         </div>
-							<div class="date">
-								<?php the_time('d \d\e F \d\e Y'); ?>
+							<div class="description">
+								<?php $row  = the_excerpt() ; ?>
+								<?php echo substr($row, 0, 250); ?>
 							</div>
 						<?php $cont++; ?>
 					</li>
