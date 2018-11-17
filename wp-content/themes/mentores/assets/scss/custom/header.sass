@@ -1,0 +1,191 @@
+.header
+	#header-sroll
+		position: fixed
+		height: 75px
+		background: $backgroundRadial
+		left: 0
+		top: 0
+		width: 100%
+		z-index: 1000
+		-ms-transition : all 0.3s ease-out
+		-moz-transition : all 0.3s ease-out
+		-webkit-transition: all 0.3s ease-out                                                                                  
+		-o-transition : all 0.3s ease-out
+		transition : all 0.3s ease-out
+		@include flexbox()
+		@include flex-basis(50%)
+		@include justify-content(space-between)
+		@include align-items(center)
+		padding-left: 20px
+		padding-right: 20px
+		.logo
+			// @include flex(1 1 10%)
+			@include flexbox()
+			@include justify-content(flex-start)
+			@include align-items(center)
+			width: 15%
+			margin: 0
+			padding: 0
+			max-height: 100%!important
+			img
+				width: auto
+				height: auto
+				min-width: 140px
+				padding: 0
+				@include transition( all 0.3s ease-out)
+				max-height: 70px!important
+			h1
+				font-size: 30px
+				font-family: Arial
+				margin: 0
+				line-height: 50px
+				@include transition( all 0.3s ease-out)
+				max-height: 100%
+		&.small
+			height: 65px
+			line-height: 35px
+			@include box-shadow(0 2px 20px 1px rgba(black,0.2))
+			h1
+				height: 70px
+				line-height: 35px
+				font-size: 25px
+				@include flexbox()
+				@include justify-content(center)
+				@include align-items(center)
+			img
+				width: 40%
+				height: auto
+				margin: 0 
+		.menu
+			// @include flex(1 1 50%)
+			@include flexbox()
+			@include justify-content(flex-start)
+			@include align-items(center)
+			position: relative
+			width: 70%
+			.menu-principal
+				// @include flex(1 1 50%)
+				@include flexbox()
+				@include justify-content(center)
+				@include align-items(center)
+				width: 100%
+			ul
+				margin: 0
+				padding: 0
+				li
+					list-style-type: none
+					margin-left: 20px
+					&:last-child
+						// font-family: $naestante
+						font-size: calculateRem(14px)
+						font-weight: 700
+						margin-left: 30px
+						position: relative
+						color: black
+						text-transform: uppercase
+						text-decoration: 
+						a
+							color: $secondary
+							&:after
+								content:  ''
+								display: block
+								width: 100%
+								height: 2px
+								background:  black
+								@include transition(all .1s ease-in-out)
+								opacity: 0
+							&:before
+								content:  '	'
+								display: block
+								width: 10px
+								height: 10px
+								position: absolute
+								left: -15px
+								top: 3px
+								border-radius: 50%
+								background-color: $secondary
+					a
+						// font-family: $naestante
+						font-size: calculateRem(14px)
+						font-weight: 700
+						position: relative
+						color: black
+						text-transform: uppercase
+						text-decoration: none
+						&:after
+							content:  ''
+							display: block
+							width: 100%
+							height: 2px
+							background:  $secondary
+							@include transition(all .1s ease-in-out)
+							opacity: 0
+					a
+						&:hover
+							&:after
+								opacity: 1
+		.social
+			// @include flex(1 1 5%)
+			@include flexbox()
+			@include justify-content(flex-start)
+			@include align-items(center)
+			position: relative
+			width: 15%
+			ul
+				background: transparent
+				margin: 0
+				padding: 0
+				position: relative
+				@include flexbox()
+				@include justify-content(space-around)
+				@include align-items(center)
+				width: 100%
+				&:after
+					content: ''
+					display: block
+					position: absolute
+					width: 2px
+					background-color: black
+					height: 40px
+					left: 0
+					top: -10px
+				li
+					list-style-type: none
+					height: auto
+					@include flexbox()
+					background: transparent
+					@include justify-content(center)
+					@include align-items(center)
+					a
+						@include flexbox()
+						background: transparent
+						@include justify-content(center)
+						@include align-items(center)
+						text-decoration: none
+						color: black
+						&:hover
+							i
+								color: rgba(black,0.8)
+						i
+							@include transition(all .2s ease)
+							font-size: calculateRem(20px)
+							color: black
+		.form
+			position: absolute
+			right: 10px
+			top: 0
+			#form-container
+				#searchform
+					cursor: pointer
+					&:hover
+						#s
+							width: 10em
+							opacity: 1
+					#s
+						width: 0
+						opacity: 0
+						background-color: transparent!important
+						border: none
+						border-bottom: 2px solid
+						outline: none
+						@include transition(all .3s ease)

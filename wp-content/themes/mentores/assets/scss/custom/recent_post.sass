@@ -1,0 +1,159 @@
+.home
+    .card-post
+        // margin-top: 70px
+        // margin-bottom: 100px
+.recent_post
+    @include flexbox()
+    @include flex-basis(50%)
+    @include justify-content(space-around)
+    @include align-items(center)
+    flex-wrap: wrap
+    width: 70%
+    margin: 0 auto
+    margin-top: 100px
+    margin-bottom: 100px
+    .card-post
+        border:  2px solid transparent
+        height: 360px
+        position: relative
+        padding: 15px
+        padding-top: 0px
+        z-index: 0
+        cursor: pointer
+        &:hover
+            .btn-category
+                transform: translate(0)
+        .image-full
+            width: 100%
+            height: 170px
+            background-position: center
+            background-size: cover
+            background-repeat: no-repeat
+        &.number-1,
+        &.number-2,
+        &.number-3,
+        &.number-4,
+        &.number-5,
+        &.number-6
+            @include flex(1 1 33%)
+        &.number-2
+            &:before
+                content:  ' '
+                display: block
+                width: 90%
+                height: 2px
+                background: $primary
+                position: absolute
+                right: 0
+                left: 0
+                margin: 0 auto
+                bottom: 15px
+            &:after
+                content:  ' '
+                display: block
+                width: 2px
+                height: 90%
+                background: $primary
+                position: absolute
+                right: 0
+                top: 0
+        &.number-3
+            &:before
+                content:  ' '
+                display: block
+                width: 90%
+                height: 2px
+                background: $primary
+                position: absolute
+                right: 0
+                left: 0
+                margin: 0 auto
+                bottom: 15px
+        &.number-1
+            &:after
+                content:  ' '
+                display: block
+                width: 90%
+                height: 2px
+                background: $primary
+                position: absolute
+                right: 0
+                left: 0
+                margin: 0 auto
+                bottom: 15px
+            &:before
+                content:  ' '
+                display: block
+                width: 2px
+                height: 90%
+                background: $primary
+                position: absolute
+                right: 0
+                top: 0
+        &.number-4
+            &:before
+                content:  ' '
+                display: block
+                width: 2px
+                height: 90%
+                background: $primary
+                position: absolute
+                right: 0
+                top: 0
+        &.number-5
+            &:before
+                content:  ' '
+                display: block
+                width: 2px
+                height: 90%
+                background: $primary
+                position: absolute
+                right: 0
+                top: 0
+        .full
+            a
+                text-decoration: none!important
+            .title-3
+                margin-top: 20px
+                font-family:   $montserrat
+                font-weight: 600
+                color: black
+        .btn-category
+            position: absolute
+            bottom: 30px
+            right: 1px
+            border: none
+            background-color: $secondary
+            border-radius: 0px
+            height: 30px
+            width: auto
+            overflow: hidden !important
+            min-width: 40%
+            max-width: 80%
+            z-index: 1
+            transform: translate(110%)
+            @include flexbox()
+            @include justify-content(center)
+            @include align-items(center)
+            @include transition(all .4s ease)
+            a
+                font-size: calculateRem(13px)
+                color: white
+            .btn
+                outline: none!important
+                box-shadow: none!important
+            .owl-nav
+                display: none!important
+            .owl-stage-outer
+                width: 100%
+                @include flexbox()
+                @include justify-content(space-around)
+                @include align-items(center)
+                .owl-stage
+                    width: 100%!important
+                    @include flexbox()
+                    @include justify-content(flex-start)
+                    @include align-items(center)
+                    .owl-item
+                        width: auto!important
+

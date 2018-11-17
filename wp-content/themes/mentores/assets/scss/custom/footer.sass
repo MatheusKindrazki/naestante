@@ -1,0 +1,31 @@
+footer
+	.redes-sociais
+		ul
+			display: flex
+			align-items: center
+			justify-content: flex-start
+			flex-wrap: wrap
+			margin: 0
+			padding: 0
+			li
+				list-style-type: none
+				margin: 7.5px 5px
+				&:first-child
+					margin-left: 0
+				&:last-child
+					margin-right: 0
+				a
+					font-size: calculateRem(12px)
+					display: flex
+					align-items: center
+					justify-content: center
+					width: 30px
+					height: 30px
+					color: white
+					border-radius: 50%
+					// @include box-shadow(inset 0px 0px 0px 30px $mentores)
+					@include transition(all .3s linear)
+					&:hover
+						text-decoration: none
+						color: $mentores
+						@include box-shadow(inset 0px 0px 0px 2px $mentores)

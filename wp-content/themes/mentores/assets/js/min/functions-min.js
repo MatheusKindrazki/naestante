@@ -1,0 +1,1 @@
+jQuery("document").ready(function(){jQuery(".main-banner .owl-carousel").owlCarousel({loop:!0,margin:10,nav:!0,items:1})});

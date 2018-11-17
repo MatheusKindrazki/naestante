@@ -1,0 +1,55 @@
+body
+	background-color: white
+	padding: 0
+	margin: 0
+	font-size: $font-size
+	line-height: $font-size
+	font-family: $montserrat
+	color: $black
+	background-size: contain
+	text-rendering: optimizeLegibility !important
+	-webkit-font-smoothing: antialiased !important
+
+pre
+	display: block
+	padding: 9.5px
+	margin: 0 0 10px
+	font-size: 13px
+	line-height: 1.428571429
+	word-break: break-all
+	word-wrap: break-word
+	color: #333333
+	background-color: #ccc
+	border: 1px solid #cccccc
+	border-radius: 4px
+
+
+a,
+button
+	&:hover
+		cursor: pointer !important
+
+// Buttons
+.btn-primary
+	display: table
+	text-align: center
+	font-weight: 700
+	padding: 12px
+	width: 200px
+	background: transparent
+	letter-spacing:  calculateRem(3px)
+	border-radius: 4px
+	line-height: 1rem
+	color: $primary
+	border: 0
+	@include box-shadow(1px -1px 0px 0px #FDC82C,-1px 0px 0px 0px #FDC82C,0px 1px 0px 0px #FDC82C)
+	@include transition(all .3s linear)
+	&:focus,
+	&:hover,
+	&:active
+		text-decoration: none
+		outline: none
+		background-color: $primary!important
+		color: white!important
+		border: none
+		// @include box-shadow(1px -1px 0px 0px white,-1px 0px 0px 0px white,0px 1px 0px 0px white)
