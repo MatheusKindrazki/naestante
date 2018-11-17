@@ -31,7 +31,7 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 	<!-- Theme Style -->
 	<link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/assets/css/style.css">
-	<!-- <link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/assets/fonts/style.css"> -->
+	<link rel="stylesheet" href="<?php bloginfo('template_directory'); ?>/assets/fonts/style.css">
 
 	<!-- Theme Fonts Config -->
 	<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900|Montserrat:100,200,300,400,500,600,700,800,900|Open+Sans:300,400,600,700,800" rel="stylesheet">
