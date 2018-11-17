@@ -23,13 +23,13 @@
 define('DB_NAME', 'naestante');
 
 /** Usuário do banco de dados MySQL */
-define('DB_USER', 'root');
+define('DB_USER', 'naestante');
 
 /** Senha do banco de dados MySQL */
-define('DB_PASSWORD', 'mysql');
+define('DB_PASSWORD', 'mentores594');
 
 /** Nome do host do MySQL */
-define('DB_HOST', 'localhost');
+define('DB_HOST', 'mysql995.umbler.com:41890');
 
 /** Charset do banco de dados a ser usado na criação das tabelas. */
 define('DB_CHARSET', 'utf8mb4');
@@ -68,7 +68,8 @@ define('NONCE_SALT',       '=0G4v2_$u5*I-F>p[Sf_Q+n|VFBIvLE,zb6MTG%S3K,P$F4b=X>$
  * um prefixo único para cada um. Somente números, letras e sublinhados!
  */
 $table_prefix  = 'ne_';
-
+define('WP_HOME', 'http://localhost/naestante/');
+define('WP_SITEURL', 'http://localhost/naestante/');
 /**
  * Para desenvolvedores: Modo de debug do WordPress.
  *
