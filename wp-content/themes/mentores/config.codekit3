@@ -88,6 +88,16 @@
 		"oAP": "/assets/fonts/phosphatesolid-webfont.woff2",
 		"oF": 0
 		},
+	"/assets/fonts/style-min.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "/assets/fonts/style-min-min.css",
+		"oF": 0,
+		"oS": 3
+		},
 	"/assets/fonts/style.css": {
 		"aP": 1,
 		"bl": 0,
@@ -1893,6 +1903,13 @@
 		"oAP": "/style-min.css",
 		"oF": 0,
 		"oS": 3
+		},
+	"/templates/block/content-testimonial.php": {
+		"cB": 0,
+		"ft": 8192,
+		"oA": 0,
+		"oAP": "/templates/block/content-testimonial.php",
+		"oF": 0
 		},
 	"/templates/contato.php": {
 		"cB": 0,

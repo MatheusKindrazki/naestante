@@ -2896,6 +2896,13 @@ function acf_in_array( $value = '', $array = false ) {
 
 function acf_get_valid_post_id( $post_id = 0 ) {
 	
+	// allow filter to short-circuit load_value logic
+	$preload = apply_filters( "acf/pre_load_post_id", null, $post_id );
+    if( $preload !== null ) {
+	    return $preload;
+    }
+    
+    
 	// vars
 	$_post_id = $post_id;
 	
@@ -3604,51 +3611,62 @@ function acf_get_truncated( $text, $length = 64 ) {
 
 function acf_get_current_url() {
 	
-	// vars
-	$home = home_url();
+	// Get url to current request.
 	$url = home_url($_SERVER['REQUEST_URI']);
 	
-	
-	// test
-	//$home = 'http://acf5/dev/wp-admin';
-	//$url = $home . '/dev/wp-admin/api-template/acf_form';
-	
-	
-	// explode url (4th bit is the sub folder)
-	$bits = explode('/', $home, 4);
-	
-	
-	/*
-	Array (
-	    [0] => http:
-	    [1] => 
-	    [2] => acf5
-	    [3] => dev
-	)
-	*/
-	
-	
-	// handle sub folder
-	if( !empty($bits[3]) ) {
-		
-		$find = '/' . $bits[3];
-		$pos = strpos($url, $find);
-		$length = strlen($find);
-		
-		if( $pos !== false ) {
-			
-		    $url = substr_replace($url, '', $pos, $length);
-		    
-		}
-				
+	// Fix bug where multisite sub-directory path segment is repeated.
+	// Eg. http://multisite.local/sub1/sub1/sample-page/
+	if( is_multisite() ) {
+		$url = acf_str_join( home_url(), $_SERVER['REQUEST_URI'] );
 	}
 	
-	
-	// return
+	// Return url.
 	return $url;
-	
 }
 
+/**
+*  acf_str_join
+*
+*  Joins together 2 strings removing any overlapping characters.
+*  Useful for urls. Eg: 'test.local/foo/' + '/foo/bar/' = 'test.local/foo/bar/'
+*
+*  @date	19/11/18
+*  @since	5.8.0
+*
+*  @param	string $s1 The first string.
+*  @param	string $s2 The seccond string.
+*  @return	string
+*/
+function acf_str_join( $s1 = '', $s2 = '' ) {
+	
+	// Remember number of chars that overlap.
+	$overlap = 0;
+	
+	// Find shortest word length.
+	$length = min( strlen($s1), strlen($s2) );
+	
+	// Find number of chars that overlap.
+	for( $i = 0; $i < $length; $i++ ) {
+		if( substr($s1, -$i) === substr($s2, 0, $i) ) {
+			$overlap = $i;
+		}
+	}
+	
+	// shorten $s2 based on overlap
+	if( $overlap ) {
+		$s2 = substr($s2, $overlap);
+	}
+	
+	// Return joined string.
+	return $s1 . $s2;
+}
+
+// Tests.
+//acf_test( acf_str_join('http://multisite.local/sub1/', '/sample-page/'), 'http://multisite.local/sub1/sample-page/' );
+//acf_test( acf_str_join('http://multisite.local/sub1/', 'sample-page/'), 'http://multisite.local/sub1/sample-page/' );
+//acf_test( acf_str_join('http://multisite.local/sub1/', '/sub1'), 'http://multisite.local/sub1/sub1' );
+//acf_test( acf_str_join('http://multisite.local/sub1/', '/sub1/sample-page/'), 'http://multisite.local/sub1/sample-page/' );
+//acf_test( acf_str_join('http://multisite.local/', '/sub1/sample-page/'), 'http://multisite.local/sub1/sample-page/' );
 
 /*
 *  acf_current_user_can_admin
@@ -4565,6 +4583,21 @@ function acf_dev_log() {
 	}
 }
 
+/**
+*  acf_test
+*
+*  Tests a function against an expected result and logs the pass/fail.
+*
+*  @date	19/11/18
+*  @since	5.8.0
+*
+*  @param	type $var Description. Default.
+*  @return	type Description.
+*/
+function acf_test( $result, $expected_result ) {
+	$success = ($result === $expected_result);
+	acf_log('ACF Test', $success ? '(Pass)' : '(Fail)', $result, $expected_result);
+}
 
 /*
 *  acf_doing
@@ -5076,43 +5109,54 @@ function acf_strip_protocol( $url ) {
 *
 *  @type	function
 *  @date	11/01/2017
+*  @since	5.8.0 Added filter to prevent connection.
 *  @since	5.5.4
 *
-*  @param	$attachment_id (int)
-*  @param	$post_id (int)
-*  @return	(boolean) 
+*  @param	int $attachment_id The attachment ID.
+*  @param	int $post_id The post ID.
+*  @return	bool True if attachment was connected.
 */
-
 function acf_connect_attachment_to_post( $attachment_id = 0, $post_id = 0 ) {
 	
-	// bail ealry if $attachment_id is not valid
-	if( !$attachment_id || !is_numeric($attachment_id) ) return false;
+	// Bail ealry if $attachment_id is not valid.
+	if( !$attachment_id || !is_numeric($attachment_id) ) {
+		return false;
+	}
 	
+	// Bail ealry if $post_id is not valid.
+	if( !$post_id || !is_numeric($post_id) ) {
+		return false;
+	}
 	
-	// bail ealry if $post_id is not valid
-	if( !$post_id || !is_numeric($post_id) ) return false;
-	
+	/**
+	*  Filters whether or not to connect the attachment.
+	*
+	*  @date	8/11/18
+	*  @since	5.8.0
+	*
+	*  @param	bool $bool Returning false will prevent the connection. Default true.
+	*  @param	int $attachment_id The attachment ID.
+	*  @param	int $post_id The post ID.
+	*/
+	if( !apply_filters('acf/connect_attachment_to_post', true, $attachment_id, $post_id) ) {
+		return false;
+	}
 	
 	// vars 
 	$post = get_post( $attachment_id );
 	
-	
-	// check if valid post
+	// Check if is valid post.
 	if( $post && $post->post_type == 'attachment' && $post->post_parent == 0 ) {
 		
 		// update
 		wp_update_post( array('ID' => $post->ID, 'post_parent' => $post_id) );
 		
-		
 		// return
 		return true;
-		
 	}
-	
 	
 	// return
 	return true;
-
 }
 
 
@@ -5358,6 +5402,68 @@ function acf_convert_rules_to_groups( $rules, $anyorall = 'any' ) {
 	
 	// return
 	return $groups;
+}
+
+/**
+*  acf_register_ajax
+*
+*  Regsiters an ajax callback.
+*
+*  @date	5/10/18
+*  @since	5.7.7
+*
+*  @param	string $name The ajax action name.
+*  @param	array $callback The callback function or array.
+*  @param	bool $public Whether to allow access to non logged in users.
+*  @return	void
+*/
+function acf_register_ajax( $name = '', $callback = false, $public = false ) {
+	
+	// vars
+	$action = "acf/ajax/$name";
+	
+	// add action for logged-in users
+	add_action( "wp_ajax_$action", $callback );
+	
+	// add action for non logged-in users
+	if( $public ) {
+		add_action( "wp_ajax_nopriv_$action", $callback );
+	}
+}
+
+/**
+*  acf_str_camel_case
+*
+*  Converts a string into camelCase.
+*  Thanks to https://stackoverflow.com/questions/31274782/convert-array-keys-from-underscore-case-to-camelcase-recursively
+*
+*  @date	24/10/18
+*  @since	5.8.0
+*
+*  @param	string $string The string ot convert.
+*  @return	string
+*/
+function acf_str_camel_case( $string = '' ) {
+	return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $string))));
+}
+
+/**
+*  acf_array_camel_case
+*
+*  Converts all aray keys to camelCase.
+*
+*  @date	24/10/18
+*  @since	5.8.0
+*
+*  @param	array $array The array to convert.
+*  @return	array
+*/
+function acf_array_camel_case( $array = array() ) {
+	$array2 = array();
+	foreach( $array as $k => $v ) {
+		$array2[ acf_str_camel_case($k) ] = $v;
+	}
+	return $array2;
 }
 
 ?>
